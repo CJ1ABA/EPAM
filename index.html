@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Book case</title>
+</head>
+
+<body>
+    <div class="container" id="app">
+        <h1 class="title">Книжная полка</h1>
+        <button class="btn" type="submit" v-on:click="addBook">Добавить книгу</button>
+        <div class="box" v-show="bookVisible">
+            <div class="book" v-for="item of products">
+                <img class="book__img" :src="'img/' + item.id_product + '.jpg'" alt="book_img">
+                <div class="book__caption">
+                    <p><strong> {{item.product_name}}</strong></p>
+                    <p>{{item.autor}}</p>
+                    <p>{{item.year}}</p>
+                </div>
+                <div class="book__butt">
+                    <button class="btn" v-on:click="redactBook(item)">Редактировать</button>
+                    <button class="btn" v-on:click="delBook(item)">Удалить</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="redactForm" v-show="redactBookVisible">
+            <h2>Редактирование книги</h2>
+            <div class="redactForm__caption">
+                <p>Наименование</p>
+                <input class="redactForm__inp" type="text" name="product_name" v-on:input="inputChange"
+                    :value="redactedBook.product_name">
+                <p>Автор</p>
+                <input class="redactForm__inp" name="autor" v-on:input="inputChange" :value="redactedBook.autor"
+                    type="text">
+                <p>Год выпуска</p>
+                <input type="text" name="year" v-on:input="inputChange" :value="redactedBook.year" style="margin: 8px 0
+                24px">
+                <p>Изображение</p>
+                <input class="redactForm__inp" name="bookImg" v-on:input="inputChange" placeholder="http://"
+                    type="text">
+            </div>
+            <div class="redactForm__butt">
+                <button class="btn" type="submit" v-on:click="saveChanges">Сохранить</button>
+                <button class="btn" type="submit" v-on:click="cancelAct">Отменить</button>
+            </div>
+        </div>
+
+        <div class="redactForm" v-show="addBookVisible">
+            <h2>Добавление книги</h2>
+            <div class="redactForm__caption">
+                <p>Наименование</p>
+                <input class="redactForm__inp" type="text" name="product_name" v-on:input="inputChange">
+                <p>Автор</p>
+                <input class="redactForm__inp" type="text" name="autor" v-on:input="inputChange">
+                <p>Год выпуска</p>
+                <input type="text" name="year" v-on:input="inputChange" style="margin: 8px 0 24px">
+                <p>Изображение</p>
+                <input class="redactForm__inp" type="text" name="bookImg" v-on:input="inputChange">
+            </div>
+            <div class="redactForm__butt">
+                <button class="btn" type="submit" v-on:click="saveNew">Сохранить</button>
+                <button class="btn" type="submit" v-on:click="cancelAct()">Отменить</button>
+            </div>
+        </div>
+    </div>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
+        integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
